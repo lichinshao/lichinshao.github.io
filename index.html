@@ -5,12 +5,47 @@
 </head>
 
 <body>
-	<h1 style="text-align: center;">Hello World</h1>
-	<img src="images/Nautilus_0.jpg" width="300">
-	<p>I'm hosted with GitHub Pages.</p>
-	<p> blah blah blah</p>
+	<section>
+		<h1>Mortgage Calculator</h1>
+		<form>
+			<label>House Price </label>
+			<input type="text" value="1000000" onblur="calculatePayment()" id="housePrice"> 
+			<label>Down Payment</label>
+			<input type="text" id="downPayment" value="250000" onblur="calculatePayment()">
+			<label>Length of Term (in years) </label>
+			<input type="text" id="lengthOfTerm" value="30" onblur="calculatePayment">
+			<label>Interest rate </label>
+			<input type="text" id="interestRate" value="3.35" onblur="calculatePayment">
+		</form>
+		<label> Monthly Payment </label>
+		<span id="monthlyPayment" >0</span>
+	</section>
+	<script type="text/javascript">
+		function calculatePayment() {
+			var housePrice = document.getElementById('housePrice').value;
+			var downPayment = document.getElementById('downPayment').value;
+			var lengthOfTerm = document.getElementById('lengthOfTerm').value;
+			var interestRate = document.getElementById('interestRate').value;
+
+			document.getElementById('monthlyPayment').innerHTML = monthlyPayment(housePrice, downPayment, lengthOfTerm, interestRate);
+		}
+
+		function monthlyPayment(housePrice, downPayment, lengthOfTerm, interestRate){
+			var payment = 0;
+			var rate = (interestRate/100)/12;
+			var length = lengthOfTerm*12;
+			var principal = housePrice-downPayment;
+			var q = Math.pow((1+rate),length);
+			payment = (principal*rate*q)/(q-1);
+			return payment.toFixed(2);
+		}
+		
+		calculatePayment();
+		
+	</script>
 </body>
 </html>
+
 
 
 
