@@ -6,20 +6,38 @@
 
 <body>
 	<section>
-		<h1>Mortgage Calculator</h1>
+		<h1>Mortgage Calculator by Price</h1>
 		<form>
 			<label>House Price </label>
 			<input type="text" value="1000000" onblur="calculatePayment()" id="housePrice"> 
 			<label>Down Payment</label>
 			<input type="text" id="downPayment" value="250000" onblur="calculatePayment()">
 			<label>Length of Term (in years) </label>
-			<input type="text" id="lengthOfTerm" value="30" onblur="calculatePayment">
+			<input type="text" id="lengthOfTerm" value="30" onblur="calculatePayment()">
 			<label>Interest rate </label>
-			<input type="text" id="interestRate" value="3.35" onblur="calculatePayment">
+			<input type="text" id="interestRate" value="3.35" onblur="calculatePayment()">
 		</form>
 		<label> Monthly Payment </label>
-		<span id="monthlyPayment" >0</span>
+		<span id="monthlyPayment" ></span>
 	</section>
+	
+	<section>
+		<h1>House price by monthly payment</h1>
+		<form>
+			<label>Down Payment</label>
+			<input type="text" value="25000" id="downSecured" onblur="calculateHousePrice()">
+			<label>Affordable Monthly Payment </label>
+			<input type="text" value="500" id="monthlySecured" onblur="calculateHousePrice()">
+			<label>Length of Terms(in years)</label>
+			<input type="text" value="30" id="lengthSecured" onblur="calculateHousePrice()">
+			<label> Interest Rate </label>
+			<input type="text" value="3.5" id="interestSecured" onblur="calculateHousePrice()">
+		</form>
+		<label>Projected House Price</label>
+		<span id="projectedHousePrice"></span>
+	</section>
+
+
 	<script type="text/javascript">
 		function calculatePayment() {
 			var housePrice = document.getElementById('housePrice').value;
@@ -37,11 +55,34 @@
 			var principal = housePrice-downPayment;
 			var q = Math.pow((1+rate),length);
 			payment = (principal*rate*q)/(q-1);
+
+			console.log(payment);
 			return payment.toFixed(2);
 		}
+
+		function calculateHousePrice() {
+			var downSecured = document.getElementById('downSecured').value;
+			var monthlySecured = document.getElementById('monthlySecured').value;
+			var lengthSecured = document.getElementById('lengthSecured').value;
+			var interestSecured = document.getElementById('interestSecured').value;
+			document.getElementById('projectedHousePrice').innerHTML=projectedHousePrice(downSecured,monthlySecured,lengthSecured,interestSecured);
+		}
+		function projectedHousePrice(downSecured, monthlySecured, lengthSecured, interestSecured){
+			var targetHousePrice = 0;
+			var rate = (interestSecured/100)/12;
+			var length = lengthSecured*12;
+			var q = Math.pow((1+rate),length);
+			console.log(downSecured);
+			console.log(monthlySecured);
+			targetHousePrice = Number(downSecured) + (Number(monthlySecured)/((rate*q)/(q-1)));
+			//Number(downSecured) since no operations are being dne on downSecured, it kept it as a string, so need to put Number in the front to keep it as a number. 
 		
+			return targetHousePrice.toFixed(2);
+		}
+
 		calculatePayment();
-		
+		calculateHousePrice();
+
 	</script>
 </body>
 </html>
