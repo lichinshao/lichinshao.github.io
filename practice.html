@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<section>
+	<h1>Home address to calculate mortgage </h1>
+	<h3>House Price</h3>
+	<input type="text" value="788000" id="housePrice">
+	<ul id="unorderedList"></ul>
+	<button onclick="comparePayments()">Compare other monthly payments</button>
+
+
+</section>
+<script type="text/javascript">
+//function to create entry in a list
+function createEntry(formIndex){
+	console.log('hi'); //console.log only prints on debug 
+	var unorderedList = document.getElementById('unorderedList'); //create list
+	console.log(unorderedList);
+	var li = document.createElement('li');
+	console.log(li);
+	var form = document.createElement('form');
+
+	var downPaymentLabel = document.createElement("label");
+
+	//li.innerHTML = "Hi there"; //inner html adds text in an element in the list
+	//form.innerHTML = "blah"; //insert text into form
+	var downPayment = document.createElement('input');
+	downPaymentLabel.innerHTML = "Down Payment";
+	form.setAttribute('id','form'+ formIndex); //set form id = form1 
+
+	downPayment.setAttribute('type', 'text');
+	downPayment.setAttribute('value', '200000');
+	downPayment.setAttribute('name','downPayment')
+
+	var lengthOfTermLabel = document.createElement("label");
+	lengthOfTermLabel.innerHTML="Term Length (years)";
+
+
+	var lengthOfTerm = document.createElement('input');
+	lengthOfTerm.setAttribute('type','text');
+	lengthOfTerm.setAttribute('value','30');
+	lengthOfTerm.setAttribute('name', 'lengthOfTerm');
+
+
+	var interestLabel = document.createElement('label');
+	interestLabel.innerHTML = "Interest Rate";
+
+	var interestRate = document.createElement('input');
+	interestRate.setAttribute('type','text');
+	interestRate.setAttribute('value', '3.4');
+	interestRate.setAttribute('name','interestRate');
+
+
+
+	var monthlyPaymentLabel = document.createElement('label');
+	monthlyPaymentLabel.innerHTML = "<br/> Monthly Payment";
+
+	var monthlyPayment = document.createElement('span');
+	monthlyPayment.setAttribute('id','monthlyPayment' + formIndex);
+
+
+
+	unorderedList.appendChild(li); //add elements to the list
+	li.appendChild(form);
+	form.appendChild(downPaymentLabel);
+	form.appendChild(downPayment);
+	form.appendChild(lengthOfTermLabel);
+	form.appendChild(lengthOfTerm);
+	form.appendChild(interestLabel);
+	form.appendChild(interestRate);
+	form.appendChild(monthlyPaymentLabel);
+	li.appendChild(monthlyPayment);
+
+}
+
+function paymentSetup(formIndex) {
+	//1. which form (by index) ex. form0
+	//2. get values of each input fields by name imstead of id
+	//		
+	var form = document.getElementById('form'+formIndex);
+	var downPayment = form.downPayment.value;
+	var lengthOfTerm = form.lengthOfTerm.value;
+	var interestRate = form.interestRate.value;
+	var housePrice = document.getElementById('housePrice').value;
+	/*
+	var downPayment = document.getElementById('downPayment').value;
+	var lengthOfTerm = document.getElementById('lengthOfTerm').value;
+	var interestRate = document.getElementById('interestRate').value;
+	var housePrice = document.getElementById('housePrice').value;
+*/
+	document.getElementById('monthlyPayment' + formIndex).innerHTML = calculatePayment(housePrice,downPayment,lengthOfTerm,interestRate);
+
+}
+
+function calculatePayment(housePrice,downPayment, lengthOfTerm, interestRate){
+
+			var payment = 0;
+			var rate = (interestRate/100)/12;
+			var length = lengthOfTerm*12;
+			var principal = housePrice-downPayment;
+			var q = Math.pow((1+rate),length);
+			payment = (principal*rate*q)/(q-1);
+
+			console.log(payment);
+			return payment.toFixed(2);
+
+
+
+}
+
+
+function comparePayments(){
+	console.log('fjf');
+	var unorderedList= document.getElementById('unorderedList');
+	var numberLi = unorderedList.getElementsByTagName('li').length; //tagname because li is a tag
+
+	createEntry(numberLi);
+	paymentSetup(numberLi);
+}
+
+createEntry(0);
+paymentSetup(0);
+
+
+
+
+</script>
+</body>
+</html>

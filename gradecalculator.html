@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head><h2>Grade Calculator</h2></head>
+<body>
+	<section>
+		<head>Class Work</head>
+		<ul id="classworkList"></ul>
+	</section>
+	<section>
+		<head>Tests</head>
+		<ul id="testsList"></ul>
+	</section>
+	<section>
+		<head>Final Exam</head>
+		<ul id="finalSection"></ul>
+	</section>
+	<section id="overallGrade">
+		<head>Overall Grade</head>
+	</section>
+<script type="text/javascript">
+function setUp(){
+	var cList=document.getElementById('classworkList');
+	var tList=document.getElementById('testsList');
+	var fList=document.getElementById('finalSection');
+	var olist=document.getElementById('overallGrade');
+
+	var cwPointsEarnedLabel=document.createElement('label');
+	cwPointsEarnedLabel.innerHTML="Points Earned";
+
+	var cPointsEarned = document.createElement('input');
+	cPointsEarned.setAttribute('id','cPointsEarned');
+	cPointsEarned.setAttribute('value','0');
+
+	var cTotalPointsLabel=document.createElement('label');
+	cTotalPointsLabel.innerHTML="<br>Total Possible Points"
+
+	var cTotalPoints = document.createElement('input');
+	cTotalPoints.setAttribute('id','cTotalPoints');
+	cTotalPoints.setAttribute('value','0');
+	console.log("hi");
+
+	var cGradeLabel=document.createElement('label');
+	cGradeLabel.innerHTML="<br><br>Overall classwork grade";
+
+	var cGrade=document.createElement('span');
+	cGrade.setAttribute('id','cGrade');
+	
+
+	var tPointsEarnedLabel=document.createElement('label');
+	tPointsEarnedLabel.innerHTML="Points Earned";
+
+	var tPointsEarned = document.createElement('input');
+	tPointsEarned.setAttribute('name', 'tests');
+	tPointsEarned.setAttribute('value','0');
+
+	var tTotalPointsLabel =document.createElement('label');
+	tTotalPointsLabel.innerHTML="<br>Total Possible Points"
+
+	var tTotalPoints=document.createElement('input');
+	tTotalPoints.setAttribute('name','tTotalPoints');
+	tTotalPoints.setAttribute('value','0');
+
+	var tGradeLabel=document.createElement('label');
+	tGradeLabel.innerHTML="<br><br>Overall Test Grade";
+
+	var fPointsEarnedLabel=document.createElement('label');
+	fPointsEarnedLabel.innerHTML="Points Earned";
+
+	var fPointsEarned=document.createElement('input');
+	fPointsEarned.setAttribute('name','fPointsEarned');
+	fPointsEarned.setAttribute('value','0');
+
+	var fPointsTotalLabel=document.createElement('label');
+	fPointsTotalLabel.innerHTML="<br>Total Possible Points";
+
+
+	var fPointsTotal=document.createElement('input');
+	fPointsTotal.setAttribute('name','fPointsTotal');
+	fPointsTotal.setAttribute('value','0');
+
+	var fGradeLabel=document.createElement('label');
+	fGradeLabel.innerHTML="<br><br>Overall Final Exam Grade";
+
+	classworkList.appendChild(cwPointsEarnedLabel);
+	classworkList.appendChild(cPointsEarned);
+	classworkList.appendChild(cTotalPointsLabel);
+	classworkList.appendChild(cTotalPoints);
+	classworkList.appendChild(cGradeLabel);
+	classworkList.appendChild(cGrade);
+	testsList.appendChild(tPointsEarnedLabel);
+	testsList.appendChild(tPointsEarned);
+	testsList.appendChild(tTotalPointsLabel);
+	testsList.appendChild(tTotalPoints);
+	testsList.appendChild(tGradeLabel);
+	finalSection.appendChild(fPointsEarnedLabel);
+	finalSection.appendChild(fPointsEarned);
+	finalSection.appendChild(fPointsTotalLabel);
+	finalSection.appendChild(fPointsTotal);
+	finalSection.appendChild(fGradeLabel);
+
+}
+function cwPreWork(){
+	var cPointsEarned=document.getElementById('cPointsEarned').value;
+	var cTotalPoints=document.getElementById('cTotalPoints').value;
+	 
+	cGrade.innerHTML = "  " + calClasswork(cPointsEarned,cTotalPoints);
+}
+
+function calClasswork(cPointsEarned,cTotalPoints){
+	var cGrade=0;	
+		
+	 cGrade=cPointsEarned/cTotalPoints*100;
+	 console.log('dude');
+	 return cGrade;
+
+
+
+
+}
+
+setUp();
+calClasswork();
+</script>
+</body>
+</html>
