@@ -1,19 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Mortgage Calculator</title>
-</head>
 <body>
-	<section>dfgfd
+	<section>
+		<h1>Home address to calculate mortgage</h1>
+		<form>
+			<input type="text" id="address" placeholder="Enter address" size="80" value="463 El Arroyo Rd,Hillsborough, CA 94010">
+			<button type="button" onclick="getHome()">Get House Info</button>
+		</form>
 	</section>
-	<footer>Project by Lichin Shao ♥</footer>
+
+	<section id="information">
+		<h1 id="street"></h1>
+		<h2 id="location"></h2>
+		<h3 id="estimate">$1,000,000</h3>
+		<p></p>
+	</section>
+
+	<section id="rates">
+		<h1>Todays' Mortgage Rates</h1>
+		<table>
+			<tr>
+				<td>30 Years Fixed</td>
+				<td id="thirtyYearFixed"></td>
+			</tr>
+			<tr>
+				<td>15 Years Fixed</td>
+				<td id="fifteenYearFixed"></td>
+			</tr>
+			<tr>
+				<td>Five Years One Arm</td>
+				<td id="fiveOneARM"></td>
+			</tr>
+		</table>
+	</section>
+
+	<section id="calculator">
+		<h1>Mortgage calculator</h1>
+		<label>Home Price</label> <input type="text" value="1375000" id="housePrice" onInput="updateAllPayment()">
+		<ul id="scenarios"></ul>
+		<button onclick="setupMortgageScenerio()">Add Mortgage Scenario</button>
+		<button onclick="resetMortgageScenerio()">Reset</button>
+	</section>
+
+	<script src="mortgage.js"></script>
+	<script type="text/javascript">
+		start();
+	</script>
+
 </body>
 </html>
-
-
-
-
-	<h1 style="text-align: center;">Hello World</h1>
-	<img src="images/Nautilus_0.jpg" width="300">
-	<p>I'm hosted with GitHub Pages.</p>
-	<p> blah blah blah</p>
