@@ -42,6 +42,22 @@
 		<button onclick="resetMortgageScenerio()">Reset</button>
 	</section>
 
+	<section id="projected">
+		<h1>Projected House Price of What You Can Afford</h1>
+		<form>
+			<label>Down Payment</label>
+			<input type="text" id="pDown" onBlur="setupProjectedMortgagePayment()">
+			<label>Affordable Monthly Payment</label>
+			<input type="text" id="pMonthly" onBlur="setupProjectedMortgagePayment()">
+			<label>Length of Term(in years)</label>
+			<input type="text" id="pLengthTerm" onBlur="setupProjectedMortgagePayment()">
+			<label>Interest Rate</label>
+			<input type="text" id="pIntRate" onBlur="setupProjectedMortgagePayment()">
+			<label>Projected House Price</label>
+			<input type="text" id="pHousePrice" onBlur="setupProjectedMortgagePayment()" >
+		</form>
+	</section>
+
 	<script src="mortgage.js"></script>
 	<script type="text/javascript">
 		start();

@@ -15,6 +15,7 @@ function setup(homeXml,ratesXml) {
 	setupHomeInformation(homeXml);
 	setupMortgageRates(ratesXml);
 	setupMortgageScenerio();
+	setupProjectedMortgagePayment();
 	show(true);
 }
 
@@ -62,6 +63,7 @@ function show(isShowing) {
 	document.getElementById("information").style.display = toShow;
 	document.getElementById("rates").style.display = toShow;
 	document.getElementById("calculator").style.display = toShow;
+	document.getElementById("projected").style.display = toShow;
 }
 
 function setupHomeInformation(xml) {
@@ -79,7 +81,7 @@ function setupHomeInformation(xml) {
 
 	document.getElementById("housePrice").setAttribute("value", amount);
 
-	housePrice = amount;
+	this.housePrice = amount;
 }
 
 function setupMortgageRates(xml) {
@@ -127,6 +129,22 @@ function removeAllMortgageScenarios() {
 	}
 }
 
+function setupProjectedMortgagePayment() {
+	//var price = document.getElementById("housePrice").value;
+	defaultDownpayment = housePrice * (defaultMortgageScenario.percentage/100);
+	var present = housePrice - defaultDownpayment;
+
+	var defaultMonthly = payment(mortgageRates.thirtyYearFixed,defaultMortgageScenario.term,present)
+
+	var down = document.getElementById('pDown').value = defaultDownpayment;
+	var length = document.getElementById('pLengthTerm').value = defaultMortgageScenario.term;
+	var monthly = document.getElementById('pMonthly').value = defaultMonthly;
+	var interest = document.getElementById('pIntRate').value = mortgageRates.thirtyYearFixed;
+	var m = projectedHousePrice(down,monthly,length,interest);
+	m = Number(m).toLocaleString();
+	document.getElementById('pHousePrice').value = m;
+}
+
 function updateAllPayment() {
 	var price = document.getElementById("housePrice").value;
 	var slen = document.getElementById('scenarios').getElementsByTagName("li").length;
@@ -148,10 +166,6 @@ function updatePayment(index) {
 	document.getElementById("payment"+index).innerHTML = payment(rate,term,loanAmount);
 }
 
-function calculateAmortizationSchedule() {
-
-}
-
 function resetMortgageScenerio() {
 	removeAllMortgageScenarios();
 }
@@ -168,4 +182,13 @@ function payment(rate,years,present) {
 	var pmt = (rper * present * Math.pow((1 + rper), nper) )/ (1 - Math.pow((1 + rper), nper));
 	
 	return pmt.toFixed(2);
+}
+
+function projectedHousePrice(down,monthly,length,interest) {
+	var targetPrice = 0;
+	var lengthTerm = length*12;
+	var rate = (interest/100)/12;
+	var q=Math.pow((1+rate),lengthTerm);
+	targetPrice=Number(down)+(Number(monthly)/((rate*q)/(q-1)));
+	return targetPrice.toFixed(2);	
 }
