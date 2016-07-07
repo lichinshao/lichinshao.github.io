@@ -48,9 +48,6 @@ function getHome() {
 function loadXMLDoc(url, callbackFunction){
    var xmlhttp = new XMLHttpRequest();
    
-   xmlhttp.setRequestHeader('Access-Control-Allow-Origin', 'https://lichinshao.github.io');
-   xmlhttp.setRequestHeader('Content-Type', 'application/xml');
-
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 			if( typeof callbackFunction === 'function' )
@@ -59,6 +56,10 @@ function loadXMLDoc(url, callbackFunction){
 	}
 
 	xmlhttp.open("GET",url,true);
+	
+	xmlhttp.setRequestHeader('Access-Control-Allow-Origin', 'https://lichinshao.github.io');
+	xmlhttp.setRequestHeader('Content-Type', 'application/xml');
+
 	xmlhttp.send();
 }
 
