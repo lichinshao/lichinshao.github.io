@@ -32,11 +32,11 @@ function getHome() {
 	var city = addrSplit[1];
 	var statezip = addrSplit[2];
 
-	var homeUrl = "https://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id="+zwsId+"&address="+escape(street)+"&citystatezip="+escape(city)+"%2C" +escape(statezip);
+	var homeUrl = "https://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id="+zwsId+"&address="+escape(street)+"&citystatezip="+escape(city)+"%2C"+escape(statezip);
 	
 	loadXMLDoc(homeUrl, function(homeXML) {
 		var state = homeXML.getElementsByTagName("state")[0].childNodes[0].nodeValue;
-		var rateUrl = "https://www.zillow.com/webservice/GetRateSummary.htm?zws-id="+zwsId+"&state=" + state;
+		var rateUrl = "https://www.zillow.com/webservice/GetRateSummary.htm?zws-id="+zwsId+"&state="+state;
     	
     	loadXMLDoc(rateUrl, function(rateXML) {
 			setup(homeXML,rateXML);
@@ -47,6 +47,9 @@ function getHome() {
 //function to send request for api
 function loadXMLDoc(url, callbackFunction){
    var xmlhttp = new XMLHttpRequest();
+   
+   xmlhttp.setRequestHeader('Access-Control-Allow-Origin', 'https://lichinshao.github.io');
+   xmlhttp.setRequestHeader('Content-Type', 'application/xml');
 
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
