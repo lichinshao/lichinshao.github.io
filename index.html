@@ -12,7 +12,12 @@
 	<section id="information">
 		<h1 id="street"></h1>
 		<h2 id="location"></h2>
-		<h3 id="estimate">$1,000,000</h3>
+		<h3 id="yearBuilt"></h3>
+		<h3 id="lotSizeSqFt"></h3>
+		<h3 id="bedrooms"></h3>
+		<h3 id="bathrooms"></h3>
+		<h2 id="estimate">$1,000,000</h2>
+
 		<p></p>
 	</section>
 
@@ -46,15 +51,15 @@
 		<h1>Projected House Price of What You Can Afford</h1>
 		<form>
 			<label>Down Payment</label>
-			<input type="text" id="pDown" onBlur="setupProjectedMortgagePayment()">
+			<input type="text" id="pDown" onBlur="projectedMortgagePayment()">
 			<label>Affordable Monthly Payment</label>
-			<input type="text" id="pMonthly" onBlur="setupProjectedMortgagePayment()">
+			<input type="text" id="pMonthly" onBlur="projectedMortgagePayment()">
 			<label>Length of Term(in years)</label>
-			<input type="text" id="pLengthTerm" onBlur="setupProjectedMortgagePayment()">
+			<input type="text" id="pLengthTerm" onBlur="projectedMortgagePayment()">
 			<label>Interest Rate</label>
-			<input type="text" id="pIntRate" onBlur="setupProjectedMortgagePayment()">
+			<input type="text" id="pIntRate" onBlur="projectedMortgagePayment()">
 			<label>Projected House Price</label>
-			<input type="text" id="pHousePrice" onBlur="setupProjectedMortgagePayment()" >
+			<span id="pHousePrice"></span>
 		</form>
 	</section>
 
