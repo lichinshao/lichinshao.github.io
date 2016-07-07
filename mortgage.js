@@ -57,8 +57,8 @@ function loadXMLDoc(url, callbackFunction){
 
 	xmlhttp.open("GET",url,true);
 	
-	xmlhttp.setRequestHeader('Access-Control-Allow-Origin', 'https://lichinshao.github.io');
-	
+	xmlhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+
 	xmlhttp.send();
 }
 
